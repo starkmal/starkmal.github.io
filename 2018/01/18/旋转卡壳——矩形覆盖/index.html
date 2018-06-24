@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta name="baidu-site-verification" content="jV2s9nzI8o" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Computational-Geometry," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="NKOJ4405 HNOI2007 最小矩形覆盖 传送门 居然是纸质题面，十年前的OI真是jin啊">
+<meta name="keywords" content="Computational-Geometry">
+<meta property="og:type" content="article">
+<meta property="og:title" content="旋转卡壳——矩形覆盖">
+<meta property="og:url" content="http://yoursite.com/2018/01/18/旋转卡壳——矩形覆盖/index.html">
+<meta property="og:site_name" content="Starkmal&#39;s Cruiser">
+<meta property="og:description" content="NKOJ4405 HNOI2007 最小矩形覆盖 传送门 居然是纸质题面，十年前的OI真是jin啊">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/1185_1.jpg">
+<meta property="og:image" content="http://yoursite.com/img/1185_2.jpg">
+<meta property="og:image" content="http://yoursite.com/img/pic0117.png">
+<meta property="og:updated_time" content="2018-01-18T13:29:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="旋转卡壳——矩形覆盖">
+<meta name="twitter:description" content="NKOJ4405 HNOI2007 最小矩形覆盖 传送门 居然是纸质题面，十年前的OI真是jin啊">
+<meta name="twitter:image" content="http://yoursite.com/img/1185_1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"噫..我没写过呢: ${query}","hits_stats":"${hits} ${time}秒运行游戏 ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/18/旋转卡壳——矩形覆盖/"/>
+
+
+
+
+
+  <title>旋转卡壳——矩形覆盖 | Starkmal's Cruiser</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starkmal's Cruiser</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">May the force be with you</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/18/旋转卡壳——矩形覆盖/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starkmal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starkmal's Cruiser">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">旋转卡壳——矩形覆盖</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-18T20:53:02+08:00">
+                2018-01-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="NKOJ4405-HNOI2007-最小矩形覆盖-传送门"><a href="#NKOJ4405-HNOI2007-最小矩形覆盖-传送门" class="headerlink" title="NKOJ4405 HNOI2007 最小矩形覆盖 传送门"></a>NKOJ4405 HNOI2007 最小矩形覆盖 <a href="http://42.247.7.121/zh/Problem/Details/4405" target="_blank" rel="noopener">传送门</a></h1><blockquote>
+<p>居然是纸质题面，十年前的OI真是jin啊</p>
+</blockquote>
+<p><img src="/img/1185_1.jpg" alt="1185_1"></p>
+<a id="more"></a>
+<p><img src="/img/1185_2.jpg" alt="1185_1"></p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>极度卡精题。。。</p>
+<p>首先这个最小矩形一定过凸包上的点，且有一条边经过凸包上的一边</p>
+<p>那么我们枚举这条边</p>
+<p><img src="/img/pic0117.png" alt="pic0117"></p>
+<p>这条边为$\vec {AB}$</p>
+<p>利用旋转卡壳（叉积），可得在这条边最上方的点（矩形上界）</p>
+<p>利用点积，可得在这条边最左侧和右侧的点（矩形左右界）</p>
+<p>设最上方的点为$C$，左侧和右侧的为$D$和$E$</p>
+<p>矩形四个角为$F,G,H,I$</p>
+<p>利用点积求得$|\vec {AG} |$和$ |\vec {BF} | $，得到底边长</p>
+<p>利用叉积求得高$h$，即利用单位面积，$h=\frac {\vec {AB}*\vec {AC}} {|\vec {AB}|}$</p>
+<p>就可以算出现在的矩形面积</p>
+<p>再用$\vec {AB} * \frac {|\vec {AG}|} {|\vec {AB}|}$ ，求得$\vec G、\vec F$</p>
+<p>利用$\vec {AB}$ 的方向向量乘以$h$ ，求得$\vec {GI}$，从而得到$\vec H 、\vec I$</p>
+<p>就这样。。注意细节就好</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">double</span> db;</span><br><span class="line"><span class="keyword">const</span> db eps=<span class="number">1e-10</span>;</span><br><span class="line"><span class="keyword">const</span> db pi=<span class="built_in">acos</span>(<span class="number">-1.0</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">50005</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> DEB 0</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></span><br><span class="line">	db x,y;</span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Rotate</span><span class="params">(db theta)</span></span>&#123;</span><br><span class="line">		db a=x,b=y;</span><br><span class="line">		x=a*<span class="built_in">cos</span>(theta)-b*<span class="built_in">sin</span>(theta);</span><br><span class="line">		y=a*<span class="built_in">sin</span>(theta)+b*<span class="built_in">cos</span>(theta);</span><br><span class="line">	&#125;</span><br><span class="line">	Point()&#123;&#125;</span><br><span class="line">	Point(db a,db b)&#123;</span><br><span class="line">		x=a+eps,y=b+eps;</span><br><span class="line">		<span class="keyword">this</span>-&gt;Rotate(eps);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;A[N],T[N];</span><br><span class="line"><span class="keyword">bool</span> <span class="keyword">operator</span> &lt; (<span class="keyword">const</span> Point&amp; lhs,<span class="keyword">const</span> Point&amp; rhs) &#123;</span><br><span class="line">	<span class="keyword">return</span> lhs.x&lt;rhs.x||(lhs.x==rhs.x&amp;&amp;lhs.y&lt;rhs.y);</span><br><span class="line">&#125;</span><br><span class="line">Point <span class="keyword">operator</span> + (<span class="keyword">const</span> Point&amp; lhs,<span class="keyword">const</span> Point&amp; rhs)&#123;</span><br><span class="line">	<span class="keyword">return</span> Point(lhs.x+rhs.x,lhs.y+rhs.y);</span><br><span class="line">&#125;</span><br><span class="line">Point <span class="keyword">operator</span> - (<span class="keyword">const</span> Point&amp; lhs,<span class="keyword">const</span> Point&amp; rhs)&#123;</span><br><span class="line">	<span class="keyword">return</span> Point(lhs.x-rhs.x,lhs.y-rhs.y);</span><br><span class="line">&#125;</span><br><span class="line">db <span class="keyword">operator</span> * (<span class="keyword">const</span> Point&amp; lhs,<span class="keyword">const</span> Point&amp; rhs)&#123;</span><br><span class="line">	<span class="keyword">return</span> lhs.x*rhs.x+lhs.y*rhs.y;</span><br><span class="line">&#125;</span><br><span class="line">Point <span class="keyword">operator</span> * (<span class="keyword">const</span> Point&amp; lhs,db lambda)&#123;</span><br><span class="line">	<span class="keyword">return</span> Point(lhs.x*lambda,lhs.y*lambda);</span><br><span class="line">&#125;</span><br><span class="line">Point <span class="keyword">operator</span> / (<span class="keyword">const</span> Point&amp; lhs,db lambda)&#123;</span><br><span class="line">	<span class="keyword">return</span> Point(lhs.x/lambda,lhs.y/lambda);</span><br><span class="line">&#125;</span><br><span class="line">db <span class="keyword">operator</span> ^ (<span class="keyword">const</span> Point&amp; lhs,<span class="keyword">const</span> Point&amp; rhs)&#123;</span><br><span class="line">	<span class="keyword">return</span> lhs.x*rhs.y-lhs.y*rhs.x;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">db <span class="title">mod</span><span class="params">(<span class="keyword">const</span> Point&amp; t)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">sqrt</span>(t.x*t.x+t.y*t.y);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">fcmp</span><span class="params">(db x,db y)</span></span>&#123;<span class="comment">/*</span></span><br><span class="line"><span class="comment">	if(x-y&lt;eps)return -1;</span></span><br><span class="line"><span class="comment">	if(x-y&gt;-eps)return 1;</span></span><br><span class="line"><span class="comment">	return 0;*/</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">fabs</span>(x-y)&lt;eps)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">if</span>(x-y&lt;-eps)<span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">	<span class="keyword">if</span>(x-y&gt;eps)<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n,tot;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Graham</span><span class="params">()</span></span>&#123;</span><br><span class="line">	sort(A+<span class="number">1</span>,A+<span class="number">1</span>+n);</span><br><span class="line">	<span class="keyword">int</span> i,t;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="keyword">while</span>(tot&gt;<span class="number">1</span>&amp;&amp;fcmp((T[tot]-T[tot<span class="number">-1</span>])^(A[i]-T[tot<span class="number">-1</span>]),<span class="number">0</span>)!=<span class="number">1</span>)tot--;</span><br><span class="line">		T[++tot]=A[i];</span><br><span class="line">	&#125;</span><br><span class="line">	t=tot;</span><br><span class="line">	<span class="keyword">for</span>(i=n<span class="number">-1</span>;i;i--)&#123;</span><br><span class="line">		<span class="keyword">while</span>(tot&gt;t&amp;&amp;fcmp((T[tot]-T[tot<span class="number">-1</span>])^(A[i]-T[tot<span class="number">-1</span>]),<span class="number">0</span>)!=<span class="number">1</span>)tot--;</span><br><span class="line">		T[++tot]=A[i];</span><br><span class="line">	&#125;</span><br><span class="line">	tot--;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> c[<span class="number">5</span>];</span><br><span class="line">Point g[<span class="number">5</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RC</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	c[<span class="number">1</span>]=(x+<span class="number">1</span>)%tot+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(fcmp((T[x+<span class="number">1</span>]-T[x])^(T[c[<span class="number">1</span>]]-T[x]),(T[x+<span class="number">1</span>]-T[x])^(T[c[<span class="number">1</span>]+<span class="number">1</span>]-T[x]))&lt;<span class="number">0</span>)</span><br><span class="line">		c[<span class="number">1</span>]=c[<span class="number">1</span>]%tot+<span class="number">1</span>;</span><br><span class="line">	c[<span class="number">2</span>]=x%tot+<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(fcmp((T[c[<span class="number">2</span>]]-T[x])*(T[x+<span class="number">1</span>]-T[x]),(T[c[<span class="number">2</span>]+<span class="number">1</span>]-T[x])*(T[x+<span class="number">1</span>]-T[x]))&lt;<span class="number">0</span>)</span><br><span class="line">		c[<span class="number">2</span>]=c[<span class="number">2</span>]%tot+<span class="number">1</span>;</span><br><span class="line">	c[<span class="number">3</span>]=c[<span class="number">1</span>]%tot;</span><br><span class="line">	<span class="keyword">while</span>(fcmp((T[c[<span class="number">3</span>]]-T[x])*(T[x+<span class="number">1</span>]-T[x]),(T[c[<span class="number">3</span>]+<span class="number">1</span>]-T[x])*(T[x+<span class="number">1</span>]-T[x]))&gt;<span class="number">0</span>)</span><br><span class="line">		c[<span class="number">3</span>]=c[<span class="number">3</span>]%tot+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i,j,k;</span><br><span class="line">	db x,y;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lf%lf"</span>,&amp;x,&amp;y);</span><br><span class="line">		A[i]=Point(x,y);</span><br><span class="line"><span class="comment">//		A[i].x=x,A[i].y=y;</span></span><br><span class="line">	&#125;</span><br><span class="line">	Graham();</span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> DEB</span></span><br><span class="line">	RC(<span class="number">5</span>);</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=<span class="number">3</span>;i++)</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%.3lf %.3lf\n"</span>,T[c[i]].x,T[c[i]].y);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line">	db len,h,l1,l2,maxx=<span class="number">1e9</span>;</span><br><span class="line">	Point tmp,ttt;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=tot;i++)&#123;</span><br><span class="line">		RC(i);</span><br><span class="line">		len=mod(T[i+<span class="number">1</span>]-T[i]);</span><br><span class="line">		h=((T[i+<span class="number">1</span>]-T[i])^(T[c[<span class="number">1</span>]]-T[i]))/mod(T[i+<span class="number">1</span>]-T[i]);</span><br><span class="line">		l1=(T[c[<span class="number">2</span>]]-T[i])*(T[i+<span class="number">1</span>]-T[i])/len;</span><br><span class="line">		l2=(T[c[<span class="number">3</span>]]-T[i+<span class="number">1</span>])*(T[i]-T[i+<span class="number">1</span>])/len;</span><br><span class="line">		<span class="keyword">if</span>(fcmp((l1+l2-len)*h,maxx)&lt;<span class="number">0</span>)&#123;</span><br><span class="line">			maxx=(l1+l2-len)*h;</span><br><span class="line">			</span><br><span class="line">			tmp=(T[i+<span class="number">1</span>]-T[i])*(l1/len);</span><br><span class="line">			g[<span class="number">1</span>]=T[i]+tmp;</span><br><span class="line">			</span><br><span class="line">			tmp=(T[i]-T[i+<span class="number">1</span>])*(l2/len);</span><br><span class="line">			g[<span class="number">4</span>]=T[i+<span class="number">1</span>]+tmp;</span><br><span class="line">			</span><br><span class="line">			ttt=(T[i+<span class="number">1</span>]-T[i])/mod(T[i+<span class="number">1</span>]-T[i]);</span><br><span class="line">			ttt.Rotate(pi/<span class="number">2</span>);</span><br><span class="line">			tmp=ttt*h;</span><br><span class="line">			g[<span class="number">2</span>]=g[<span class="number">1</span>]+tmp;</span><br><span class="line">			g[<span class="number">3</span>]=g[<span class="number">4</span>]+tmp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%.6lf\n"</span>,maxx);</span><br><span class="line">	<span class="keyword">int</span> lb=<span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=<span class="number">4</span>;i++)</span><br><span class="line">		<span class="keyword">if</span>(fcmp(g[i].y,g[lb].y)&lt;<span class="number">0</span>||(fcmp(g[i].y,g[lb].y)==<span class="number">0</span>&amp;&amp;fcmp(g[i].x,g[lb].x)&lt;<span class="number">0</span>))lb=i;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;=<span class="number">3</span>;i++)&#123;</span><br><span class="line">		j=(lb+i<span class="number">-1</span>)%<span class="number">4</span>+<span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(fcmp(<span class="built_in">fabs</span>(g[j].x),<span class="number">0.00001</span>)&lt;<span class="number">0</span>)<span class="built_in">printf</span>(<span class="string">"0.00000 "</span>);</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%.5lf "</span>,g[j].x);</span><br><span class="line">		<span class="keyword">if</span>(fcmp(<span class="built_in">fabs</span>(g[j].y),<span class="number">0.00001</span>)&lt;<span class="number">0</span>)<span class="built_in">printf</span>(<span class="string">"0.00000\n"</span>);</span><br><span class="line">		<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%.5lf\n"</span>,g[j].y);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Computational-Geometry/" rel="tag"># Computational-Geometry</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/17/Contest0117/" rel="next" title="Contest0117">
+                <i class="fa fa-chevron-left"></i> Contest0117
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/22/BJOI2017-zzz/" rel="prev" title="BJOI2017 -zzz">
+                BJOI2017 -zzz <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Starkmal" />
+            
+              <p class="site-author-name" itemprop="name">Starkmal</p>
+              <p class="site-description motion-element" itemprop="description">Oier</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/starkmal" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:daihaoran_stark@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jackpoison.github.io/" title="sparrow" target="_blank">sparrow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://rgnoh.github.io/" title="rgnoH" target="_blank">rgnoH</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mogicianevian.github.io/" title="OBlack" target="_blank">OBlack</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NKOJ4405-HNOI2007-最小矩形覆盖-传送门"><span class="nav-number">1.</span> <span class="nav-text">NKOJ4405 HNOI2007 最小矩形覆盖 传送门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">1.1.</span> <span class="nav-text">Solution</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starkmal</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>

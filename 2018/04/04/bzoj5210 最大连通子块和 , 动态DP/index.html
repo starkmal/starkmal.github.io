@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta name="baidu-site-verification" content="jV2s9nzI8o" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="动态DP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Description给出一棵n个点、以1为根的有根树，点有点权。要求支持如下两种操作： M x y：将点x的点权改为y； Q x：求以x为根的子树的最大连通子块和。">
+<meta name="keywords" content="动态DP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「bzoj5210」最大连通子块和,动态DP">
+<meta property="og:url" content="http://yoursite.com/2018/04/04/bzoj5210 最大连通子块和 , 动态DP/index.html">
+<meta property="og:site_name" content="Starkmal&#39;s Cruiser">
+<meta property="og:description" content="Description给出一棵n个点、以1为根的有根树，点有点权。要求支持如下两种操作： M x y：将点x的点权改为y； Q x：求以x为根的子树的最大连通子块和。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-04T10:36:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「bzoj5210」最大连通子块和,动态DP">
+<meta name="twitter:description" content="Description给出一棵n个点、以1为根的有根树，点有点权。要求支持如下两种操作： M x y：将点x的点权改为y； Q x：求以x为根的子树的最大连通子块和。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"噫..我没写过呢: ${query}","hits_stats":"${hits} ${time}秒运行游戏 ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/04/04/bzoj5210 最大连通子块和 , 动态DP/"/>
+
+
+
+
+
+  <title>「bzoj5210」最大连通子块和,动态DP | Starkmal's Cruiser</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starkmal's Cruiser</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">May the force be with you</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/04/bzoj5210 最大连通子块和 , 动态DP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starkmal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starkmal's Cruiser">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「bzoj5210」最大连通子块和,动态DP</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-04T18:19:36+08:00">
+                2018-04-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>给出一棵n个点、以1为根的有根树，点有点权。要求支持如下两种操作：</p>
+<p>M x y：将点x的点权改为y；</p>
+<p>Q x：求以x为根的子树的最大连通子块和。</p>
+<a id="more"></a>
+<p>其中，一棵子树的最大连通子块和指的是：该子树所有子连通块的点权和中的最大值</p>
+<p>（本题中子连通块包括空连通块，点权和为0）。</p>
+<h2 id="Input"><a href="#Input" class="headerlink" title="Input"></a>Input</h2><p>第一行两个整数n、m，表示树的点数以及操作的数目。</p>
+<p>第二行n个整数，第i个整数w_i表示第i个点的点权。</p>
+<p>接下来的n-1行，每行两个整数x、y，表示x和y之间有一条边相连。</p>
+<p>接下来的m行，每行输入一个操作，含义如题目所述。保证操作为M x y或Q x之一。</p>
+<p>1≤n,m≤200000 ，任意时刻 |w_i|≤10^9 。</p>
+<h2 id="Output"><a href="#Output" class="headerlink" title="Output"></a>Output</h2><p>对于每个Q操作输出一行一个整数，表示询问子树的最大连通子块和。</p>
+<h2 id="Sample-Input"><a href="#Sample-Input" class="headerlink" title="Sample Input"></a>Sample Input</h2><p>5 4<br>3 -2 0 3 -1<br>1 2<br>1 3<br>4 2<br>2 5<br>Q 1<br>M 4 1<br>Q 1<br>Q 2</p>
+<h2 id="Sample-Output"><a href="#Sample-Output" class="headerlink" title="Sample Output"></a>Sample Output</h2><p>4<br>3<br>1</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>对于没有修改的版本，一个DP就可以解决</p>
+<p>$f[x] = v[x] + \sum max\{0,\ f[u]\}$</p>
+<p>对于带修改的版本，使用动态DP</p>
+<p>定义以下状态：</p>
+<p>$F[x]$表示以$x$为根的联通块的答案</p>
+<p>$H[x]$表示$x$子树中答案$max$</p>
+<p>$LH[x]$表示$x$轻儿子的答案$max$</p>
+<p>$LF[x]$表示$\sum F[u]$</p>
+<p>动态DP上，重链的转移(将重链表示成序列$v_1, v_2…v_n$, 按深度从小到大排序，$v_n$一定没有子节点)</p>
+<script type="math/tex; mode=display">
+H_n=F_n=max(v_n,0)\\
+F_i = max(F_{i+1} +LF_i+v_i,\ 0)\\
+H_i=max(F_{i},\ H_{i+1},\ LH_i )</script><p>对于链上的DP，构建矩阵转移：(定义加法为取$max$,乘法为加法)</p>
+<script type="math/tex; mode=display">
+\left[ 
+    \begin{matrix}
+        F_{i+1},\ H_{i+1},\ 0
+    \end{matrix}
+\right]
+*
+\left[
+    \begin{matrix}
+         LF_i+v_i& LF_i+v_i & -INF\\
+         -INF& 0 & -INF \\
+        0& LH_i &0
+    \end{matrix}
+\right]
+=
+\left[
+    \begin{matrix}
+        F_i, \ H_i,\ 0
+    \end{matrix}
+\right]</script><p>化简一下转移矩阵的相乘:</p>
+<script type="math/tex; mode=display">
+\left[
+    \begin{matrix}
+        a_1&b_1&-INF\\
+        -INF& 0&-INF\\
+        d_1&c_1&0
+    \end{matrix}
+\right]
+*
+\left[
+    \begin{matrix}
+        a_2&b_2&-INF\\
+        -INF& 0&-INF\\
+        d_2&c_2&0
+    \end{matrix}
+\right]
+=
+\left[
+    \begin{matrix}
+        a_1+a_2 & max(a_1+b_2,b_1) &-INF\\
+        -INF& 0&-INF\\
+        max(d_1+a_2,d_2)&max(d_1+b_2,c_1,c_2)&0
+    \end{matrix}
+\right]</script><p>从转移矩阵中提取答案，事实上就是用向量$[0,0,0]$去乘这一块的转移矩阵，也就是$f=max(a,d),h=max(b,c)$</p>
+<p>于是对于一个链，用线段树记录一下一个区间的转移矩阵，再用链底的来乘一下就好了</p>
+<p>对于子树的DP，直接线段树加和/取max即可</p>
+<p>写的时候注意一下链上线段树的乘法要用右边乘左边（也就是树上下面乘上面）</p>
+<p>代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">200005</span>;</span><br><span class="line"><span class="keyword">const</span> ll INF = <span class="number">4e17</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">1</span> &lt;&lt; <span class="number">20</span>], *p1, *p2;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GC (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread(buf, 1, 1000000, stdin), p1 == p2) ? 0 : *p1 ++)</span></span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">int</span> _R() &#123;</span><br><span class="line">	<span class="keyword">int</span> d = <span class="number">0</span>;<span class="keyword">char</span> t;<span class="keyword">bool</span> ty = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (t = GC, (t &lt; <span class="string">'0'</span> || t &gt; <span class="string">'9'</span>) &amp;&amp; t != <span class="string">'-'</span>);</span><br><span class="line">	t == <span class="string">'-'</span> ? (ty = <span class="number">0</span>) : (d = t - <span class="string">'0'</span>);</span><br><span class="line">	<span class="keyword">while</span> (t = GC, t &gt;= <span class="string">'0'</span> &amp;&amp; t &lt;= <span class="string">'9'</span>) d = (d &lt;&lt; <span class="number">3</span>) + (d &lt;&lt; <span class="number">1</span>) + t - <span class="string">'0'</span>;</span><br><span class="line">	<span class="keyword">return</span> ty ? d : -d;</span><br><span class="line">&#125; </span><br><span class="line"><span class="keyword">inline</span> <span class="keyword">void</span> _S(<span class="keyword">char</span> *c) &#123; </span><br><span class="line">	<span class="keyword">char</span> *t = c, ch;</span><br><span class="line">	<span class="keyword">while</span> (ch = GC, ch == <span class="string">' '</span> || ch == <span class="string">'\n'</span> || ch == <span class="string">'\r'</span>) ;</span><br><span class="line">	*t ++ = ch;</span><br><span class="line">	<span class="keyword">while</span> (ch = GC, ch != <span class="string">' '</span> &amp;&amp; ch == <span class="string">'\n'</span> &amp;&amp; ch == <span class="string">'\r'</span>) *t ++ = ch;</span><br><span class="line">	*t = <span class="number">0</span>;</span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="keyword">int</span> n, m, w[N];</span><br><span class="line"><span class="keyword">int</span> Tote, Last[N], Next[N &lt;&lt; <span class="number">1</span>], End[N &lt;&lt; <span class="number">1</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ADDE</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; </span><br><span class="line">	End[++ Tote] = y, Next[Tote] = Last[x], Last[x] = Tote;</span><br><span class="line">	End[++ Tote] = x, Next[Tote] = Last[y], Last[y] = Tote;</span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sb_data</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tr_matrix</span>;</span></span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sb_data</span> &#123;</span> </span><br><span class="line">	ll f, h;</span><br><span class="line">	sb_data <span class="keyword">operator</span> + (<span class="keyword">const</span> sb_data&amp; rhs) <span class="keyword">const</span> &#123; </span><br><span class="line">		<span class="keyword">return</span> (sb_data) &#123;f + rhs.f, max(h, rhs.h)&#125;;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="function">tr_matrix <span class="title">to_tr_matrix</span><span class="params">()</span></span>;</span><br><span class="line">&#125; ;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tr_matrix</span> &#123;</span> </span><br><span class="line">	ll a, b, c, d;</span><br><span class="line">	tr_matrix <span class="keyword">operator</span> + (<span class="keyword">const</span> tr_matrix&amp; rhs) <span class="keyword">const</span> &#123; </span><br><span class="line">		<span class="keyword">return</span> (tr_matrix) &#123;a + rhs.a, max(a + rhs.b, b), </span><br><span class="line">							max(d + rhs.b, max(c, rhs.c)), max(rhs.d, d + rhs.a)&#125;;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="function">sb_data <span class="title">to_sb_data</span><span class="params">()</span></span>;</span><br><span class="line">&#125; ;</span><br><span class="line"> </span><br><span class="line">tr_matrix sb_data :: to_tr_matrix() &#123; <span class="keyword">return</span> (tr_matrix) &#123;f, f, h, <span class="number">0</span>&#125;; &#125; </span><br><span class="line">sb_data tr_matrix :: to_sb_data() &#123; <span class="keyword">return</span> (sb_data) &#123;max(a, d), max(b, c)&#125;; &#125; </span><br><span class="line"> </span><br><span class="line"><span class="keyword">namespace</span> Point &#123; </span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span> </span><br><span class="line">		Node *Son[<span class="number">2</span>];</span><br><span class="line">		sb_data val;</span><br><span class="line">	&#125; pool[N * <span class="number">6</span>], *null, *tl, *root[N];</span><br><span class="line">	  </span><br><span class="line">	<span class="keyword">void</span> _init() &#123; </span><br><span class="line">		null = tl = pool;</span><br><span class="line">		null -&gt; Son[<span class="number">0</span>] = null -&gt; Son[<span class="number">1</span>] = null;</span><br><span class="line">		null -&gt; val = (sb_data) &#123;<span class="number">0</span>, <span class="number">0</span>&#125;;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i ++) root[i] = null;</span><br><span class="line">	&#125; </span><br><span class="line">	  </span><br><span class="line">	<span class="keyword">void</span> _pushup(Node *p) &#123; </span><br><span class="line">		p -&gt; val = p -&gt; Son[<span class="number">0</span>] -&gt; val + p -&gt; Son[<span class="number">1</span>] -&gt; val;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Modify</span><span class="params">(Node *&amp;p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k, <span class="keyword">const</span> sb_data&amp; d)</span> </span>&#123; </span><br><span class="line">		<span class="keyword">if</span> (p == null) p = ++ tl, p -&gt; Son[<span class="number">0</span>] = p -&gt; Son[<span class="number">1</span>] = null;</span><br><span class="line">		<span class="keyword">if</span> (l == r) &#123; p -&gt; val = d; <span class="keyword">return</span>; &#125; </span><br><span class="line">		<span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (k &lt;= mid) Modify(p -&gt; Son[<span class="number">0</span>], l, mid, k, d);</span><br><span class="line">		<span class="keyword">else</span> Modify(p -&gt; Son[<span class="number">1</span>], mid + <span class="number">1</span>, r, k, d);</span><br><span class="line">		_pushup(p);</span><br><span class="line">	&#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Chain &#123; </span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span> </span><br><span class="line">		Node *Son[<span class="number">2</span>];</span><br><span class="line">		tr_matrix val;</span><br><span class="line">	&#125; pool[N * <span class="number">6</span>], *null, *tl, *root[N];</span><br><span class="line"> </span><br><span class="line">	<span class="keyword">void</span> _init() &#123; </span><br><span class="line">		null = tl = pool;</span><br><span class="line">		null -&gt; Son[<span class="number">0</span>] = null -&gt; Son[<span class="number">1</span>] = null;</span><br><span class="line">		null -&gt; val = (tr_matrix) &#123;<span class="number">0</span>, -INF, -INF, -INF&#125;;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= n; i ++) root[i] = null;</span><br><span class="line">	&#125; </span><br><span class="line"> </span><br><span class="line">	<span class="keyword">void</span> _pushup(Node *p) &#123; </span><br><span class="line">		p -&gt; val = p -&gt; Son[<span class="number">1</span>] -&gt; val + p -&gt; Son[<span class="number">0</span>] -&gt; val;</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="function"><span class="keyword">void</span> <span class="title">Modify</span><span class="params">(Node *&amp;p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k, <span class="keyword">const</span> tr_matrix&amp; d)</span> </span>&#123; </span><br><span class="line">		<span class="keyword">if</span> (p == null) p = ++ tl, p -&gt; Son[<span class="number">0</span>] = p -&gt; Son[<span class="number">1</span>] = null;</span><br><span class="line">		<span class="keyword">if</span> (l == r) &#123; p -&gt; val = d; <span class="keyword">return</span>; &#125; </span><br><span class="line">		<span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span> (k &lt;= mid) Modify(p -&gt; Son[<span class="number">0</span>], l, mid, k, d);</span><br><span class="line">		<span class="keyword">else</span> Modify(p -&gt; Son[<span class="number">1</span>], mid + <span class="number">1</span>, r, k, d);</span><br><span class="line">		_pushup(p);</span><br><span class="line">	&#125; </span><br><span class="line">	<span class="function">tr_matrix <span class="title">Query</span><span class="params">(Node *p, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; </span><br><span class="line">		<span class="keyword">if</span> (x &lt;= l &amp;&amp; r &lt;= y) <span class="keyword">return</span> p -&gt; val;</span><br><span class="line">		<span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		tr_matrix lm = (tr_matrix) &#123;<span class="number">0</span>, -INF, -INF, -INF&#125;, rm = (tr_matrix) &#123;<span class="number">0</span>, -INF, -INF, -INF&#125;;</span><br><span class="line">		<span class="keyword">if</span> (x &lt;= mid) lm = Query(p -&gt; Son[<span class="number">0</span>], l, mid, x, y);</span><br><span class="line">		<span class="keyword">if</span> (mid &lt; y) rm = Query(p -&gt; Son[<span class="number">1</span>], mid + <span class="number">1</span>, r, x, y);</span><br><span class="line">		<span class="keyword">return</span> rm + lm;</span><br><span class="line">	&#125; </span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> hson[N], dep[N], Cnt[N];</span><br><span class="line"><span class="keyword">int</span> totln, Bln[N], Pos_ch[N], Pos_ln[N], Pos[N], Len[N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs_init</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> sz = <span class="number">1</span>, maxx = <span class="number">0</span>, tmp, i, u;</span><br><span class="line">	dep[x] = dep[fa] + <span class="number">1</span>;</span><br><span class="line">	Cnt[x] = <span class="number">2</span>;</span><br><span class="line">	<span class="keyword">for</span> (i = Last[x]; i; i = Next[i])</span><br><span class="line">		<span class="keyword">if</span> (u = End[i], Cnt[x] ++, u != fa)</span><br><span class="line">			<span class="keyword">if</span> (tmp = dfs_init(u, x), sz += tmp, tmp &gt; maxx)</span><br><span class="line">				maxx = tmp, hson[x] = u;</span><br><span class="line">	<span class="keyword">return</span> sz;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">dfs_make</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> tp, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">	Bln[x] = totln;</span><br><span class="line">	Pos[x] = dep[x] - dep[tp] + <span class="number">1</span>;</span><br><span class="line">	Len[totln] ++;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (hson[x]) dfs_make(hson[x], tp, x);</span><br><span class="line"></span><br><span class="line">	Point :: Modify(Point :: root[x], <span class="number">1</span>, Cnt[x], <span class="number">1</span>, (sb_data) &#123;w[x], <span class="number">0</span>&#125;);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> u, j = <span class="number">2</span>, i = Last[x]; i; i = Next[i], j ++)</span><br><span class="line">		<span class="keyword">if</span> (u = End[i], u != fa &amp;&amp; u != hson[x]) &#123;</span><br><span class="line">			++ totln;</span><br><span class="line">			Pos_ch[totln] = j;</span><br><span class="line">			Pos_ln[totln] = x;</span><br><span class="line">			dfs_make(u, u, x);</span><br><span class="line">			Point :: Modify(Point :: root[x], <span class="number">1</span>, Cnt[x], j, Chain :: root[Bln[u]] -&gt; val.to_sb_data());</span><br><span class="line">		&#125;</span><br><span class="line">	Chain :: Modify(Chain :: root[Bln[x]], <span class="number">1</span>, Len[Bln[x]], Pos[x], Point :: root[x] -&gt; val.to_tr_matrix());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i, j, k, x, y, u, v;</span><br><span class="line">	n = _R(), m = _R();</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i ++) w[i] = _R();</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt; n; i ++) &#123;</span><br><span class="line">		j = _R(), k = _R();</span><br><span class="line">		ADDE(j, k);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	Point :: _init();</span><br><span class="line">	Chain :: _init();</span><br><span class="line">	dfs_init(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	dfs_make(<span class="number">1</span>, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">	<span class="keyword">char</span> opt[<span class="number">6</span>];</span><br><span class="line">	sb_data ans;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; i ++) &#123;</span><br><span class="line">		_S(opt);</span><br><span class="line">		<span class="keyword">if</span> (opt[<span class="number">0</span>] == <span class="string">'Q'</span>) &#123;</span><br><span class="line">			x = _R();</span><br><span class="line">			k = Bln[x];</span><br><span class="line">			ans = (Chain :: Query(Chain :: root[k], <span class="number">1</span>, Len[k], Pos[x], Len[k])).to_sb_data();</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans.h);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			x = _R(), w[x] = _R();</span><br><span class="line">			Point :: Modify(Point :: root[x], <span class="number">1</span>, Cnt[x], <span class="number">1</span>, (sb_data) &#123;w[x], <span class="number">0</span>&#125;);</span><br><span class="line">			Chain :: Modify(Chain :: root[Bln[x]], <span class="number">1</span>, Len[Bln[x]], Pos[x], Point :: root[x] -&gt; val.to_tr_matrix());</span><br><span class="line">			<span class="keyword">for</span> (k = Bln[x]; k; k = v) &#123; </span><br><span class="line">				u = Pos_ln[k];</span><br><span class="line">				v = Bln[u];</span><br><span class="line">				Point :: Modify(Point :: root[u], <span class="number">1</span>, Cnt[u], Pos_ch[k], Chain :: root[k] -&gt; val.to_sb_data());</span><br><span class="line">				Chain :: Modify(Chain :: root[v], <span class="number">1</span>, Len[v], Pos[u], Point :: root[u] -&gt; val.to_tr_matrix());</span><br><span class="line">			&#125; </span><br><span class="line">		&#125; </span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/动态DP/" rel="tag"># 动态DP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/20/「JLOI2015」城池攻占/" rel="next" title="「JLOI2015」城池攻占">
+                <i class="fa fa-chevron-left"></i> 「JLOI2015」城池攻占
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/09/BZOJ5093-图的价值-NTT-斯特林数/" rel="prev" title="BZOJ5093 图的价值 [NTT][斯特林数]">
+                BZOJ5093 图的价值 [NTT][斯特林数] <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Starkmal" />
+            
+              <p class="site-author-name" itemprop="name">Starkmal</p>
+              <p class="site-description motion-element" itemprop="description">Oier</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/starkmal" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:daihaoran_stark@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jackpoison.github.io/" title="sparrow" target="_blank">sparrow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://rgnoh.github.io/" title="rgnoH" target="_blank">rgnoH</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mogicianevian.github.io/" title="OBlack" target="_blank">OBlack</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Description"><span class="nav-number">1.</span> <span class="nav-text">Description</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Input"><span class="nav-number">2.</span> <span class="nav-text">Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Output"><span class="nav-number">3.</span> <span class="nav-text">Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Input"><span class="nav-number">4.</span> <span class="nav-text">Sample Input</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-Output"><span class="nav-number">5.</span> <span class="nav-text">Sample Output</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">6.</span> <span class="nav-text">Solution</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starkmal</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>

@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta name="baidu-site-verification" content="jV2s9nzI8o" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="zzz,Contest," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="机动训练题目描述整个岛可以看作一片 n*m 的区域，每个格子有自己的地形。 一条路径由一系列八连通的格子组成，两个格子八连通当且仅当这两个格子拥有公共的 顶点。 定义一条“机动路径”如下： 1、它是一条不自交的路径，即路径上任意两个格子都不是同一个 2、它的起点和终点处于不同位置，换言之这条路径至少包含 2 个格子 3、从起点开始，任何一步只能向不远离终点的方向移动，这里不远离指的是 x 和 y">
+<meta name="keywords" content="zzz,Contest">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BJOI2017 -zzz">
+<meta property="og:url" content="http://yoursite.com/2018/01/22/BJOI2017-zzz/index.html">
+<meta property="og:site_name" content="Starkmal&#39;s Cruiser">
+<meta property="og:description" content="机动训练题目描述整个岛可以看作一片 n*m 的区域，每个格子有自己的地形。 一条路径由一系列八连通的格子组成，两个格子八连通当且仅当这两个格子拥有公共的 顶点。 定义一条“机动路径”如下： 1、它是一条不自交的路径，即路径上任意两个格子都不是同一个 2、它的起点和终点处于不同位置，换言之这条路径至少包含 2 个格子 3、从起点开始，任何一步只能向不远离终点的方向移动，这里不远离指的是 x 和 y">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/img/bj20172.jpg">
+<meta property="og:image" content="http://yoursite.com/img/bj20173.jpg">
+<meta property="og:updated_time" content="2018-01-23T13:57:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BJOI2017 -zzz">
+<meta name="twitter:description" content="机动训练题目描述整个岛可以看作一片 n*m 的区域，每个格子有自己的地形。 一条路径由一系列八连通的格子组成，两个格子八连通当且仅当这两个格子拥有公共的 顶点。 定义一条“机动路径”如下： 1、它是一条不自交的路径，即路径上任意两个格子都不是同一个 2、它的起点和终点处于不同位置，换言之这条路径至少包含 2 个格子 3、从起点开始，任何一步只能向不远离终点的方向移动，这里不远离指的是 x 和 y">
+<meta name="twitter:image" content="http://yoursite.com/img/bj20172.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"噫..我没写过呢: ${query}","hits_stats":"${hits} ${time}秒运行游戏 ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/22/BJOI2017-zzz/"/>
+
+
+
+
+
+  <title>BJOI2017 -zzz | Starkmal's Cruiser</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starkmal's Cruiser</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">May the force be with you</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/22/BJOI2017-zzz/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starkmal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starkmal's Cruiser">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BJOI2017 -zzz</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-22T08:02:01+08:00">
+                2018-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="机动训练"><a href="#机动训练" class="headerlink" title="机动训练"></a>机动训练</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>整个岛可以看作一片 n*m 的区域，每个格子有自己的地形。</p>
+<p>一条路径由一系列八连通的格子组成，两个格子八连通当且仅当这两个格子拥有公共的</p>
+<p>顶点。</p>
+<p>定义一条“机动路径”如下：</p>
+<p>1、它是一条不自交的路径，即路径上任意两个格子都不是同一个</p>
+<p>2、它的起点和终点处于不同位置，换言之这条路径至少包含 2 个格子</p>
+<p>3、从起点开始，任何一步只能向不远离终点的方向移动，这里不远离指的是 x 和 y 两</p>
+<p>个方向都不远离</p>
+<a id="more"></a>
+<p>举例说明(字符画需要用等宽字体查看)：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.....y ...... .---.</span><br><span class="line">-++... ---... .-x-.</span><br><span class="line">-x+... -x+..y .-+-.</span><br><span class="line">---... ---... ..y..</span><br></pre></td></tr></table></figure>
+<p>图中加号和减号标明了与 x 八连通的所有格子，其中加号是“不远离 y”的方向</p>
+<p>因此可以看出，如下路径是机动路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">++++++y ......+y .......y</span><br><span class="line">+...... .....++. ......+.</span><br><span class="line">+...... ..++++.. ...+++..</span><br><span class="line">x...... x++..... x+++....</span><br></pre></td></tr></table></figure>
+<p>而如下路径不是机动路径：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">\../---y .......y .x.</span><br><span class="line">|--..... ....../. /..</span><br><span class="line">|....... x..../.. \..</span><br><span class="line">x....... .\--/... .y.</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，某些不合法的路径甚至比机动路径还要短，这是因为机动路径不是按照</p>
+<p>长度来定义的。</p>
+<p>接下来定义一条机动路径的地形，岛上的地形由一个矩阵给出，如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.**.</span><br><span class="line">*..*</span><br><span class="line">*..*</span><br><span class="line">.**.</span><br><span class="line">那么，一条机动路径的地形序列就是它所经过的地形排成一列，如</span><br><span class="line">x-\.</span><br><span class="line">...\</span><br><span class="line">...|</span><br><span class="line">...y</span><br></pre></td></tr></table></figure>
+<p>的地形序列就是”.<em>**</em>.”(不包含引号)</p>
+<p>每条机动路径的权重就是与之拥有相同地形序列的机动路径数量之和，例如与这条路径</p>
+<p>拥有相同地形序列的路径有</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./-y y... ...x x-\. ./-x x... ...y y-\.</span><br><span class="line">/... |... ...| ...\ /... |... ...| ...\</span><br><span class="line">|... \... .../ ...| |... \... .../ ...|</span><br><span class="line">x... .\-x y-/. ...y y... .\-y x-/. ...x</span><br></pre></td></tr></table></figure>
+<p>共 8 条，注意回文时正反算两条，以及自己也算一条。</p>
+<p>所以这条机动路径的权重是 8，同时所有这 8 条机动路径的权重都是 8。</p>
+<p>现在你需要统计所有的机动路径权重之和。</p>
+<p>如果对这种统计方式没有直观的感受，可以查看样例说明。</p>
+<h2 id="输入格式"><a href="#输入格式" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行两个整数 n, m，表示岛的大小。</p>
+<p>接下来 n 行，每行 m 个字符，表示岛的地形。</p>
+<p>字符集随数据规模给出。</p>
+<h2 id="输出格式"><a href="#输出格式" class="headerlink" title="输出格式"></a>输出格式</h2><p>仅一个数，表示所有机动路径的权重之和。</p>
+<p>由于这个数可能很大，你只需要输出它对 1000000009 取模的结果。</p>
+<h6 id="样例输入-1"><a href="#样例输入-1" class="headerlink" title="样例输入 1"></a>样例输入 1</h6><p>2 2<br>.<em>
+</em>.</p>
+<h6 id="样例输出-1"><a href="#样例输出-1" class="headerlink" title="样例输出 1"></a>样例输出 1</h6><p>72</p>
+<h6 id="样例输入-2"><a href="#样例输入-2" class="headerlink" title="样例输入 2"></a>样例输入 2</h6><p>2 3<br>.<em>.<br>\</em>.*</p>
+<h6 id="样例输出-2"><a href="#样例输出-2" class="headerlink" title="样例输出 2"></a>样例输出 2</h6><p>418</p>
+<h6 id="样例输入-3"><a href="#样例输入-3" class="headerlink" title="样例输入 3"></a>样例输入 3</h6><p>4 4<br>abba<br>baab<br>baab<br>abba</p>
+<h6 id="样例输出-3"><a href="#样例输出-3" class="headerlink" title="样例输出 3"></a>样例输出 3</h6><p>44512</p>
+<h6 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h6><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>【样例解释 1】</p>
+<p>用中括号括起来的一些数对表示一条机动路径，坐标先行后列</p>
+<p>地形序列”.*”：[(1, 1), (1, 2)], [(1, 1), (2, 1)], [(2, 2), (2, 1)], [(2, 2),(1, 2)]，共 4 条，每条权重为 4，计 16</p>
+<p>地形序列”*.”：[(1, 2), (1, 1)], [(2, 1), (1, 1)], [(2, 1), (2, 2)], [(1, 2),(2, 2)]，共 4 条，每条权重为 4，计 16</p>
+<p>地形序列”..”：[(1, 1), (2, 2)], [(2, 2), (1, 1)]，共 2 条，每条权重为 2，计 4</p>
+<p>地形序列”**”：[(1, 2), (2, 1)], [(2, 1), (1, 2)]，共 2 条，每条权重为 2，计 4</p>
+<p>地形序列”.*.”：[(1, 1), (1, 2), (2, 2)], [(1, 1), (2, 1), (2, 2)], [(2, 2),(2, 1), (1, 1)], [(2, 2), (1, 2), (1, 1)]，共 4 条，每条权重为 4，计 16</p>
+<p>地形序列”*.*”：[(1, 2), (1, 1), (2, 1)], [(2, 1), (1, 1), (1, 2)], [(1, 2),(2, 2), (2, 1)], [(2, 1), (2, 2), (1, 2)]，共 4 条，每条权重为 4，计 16</p>
+<p>共计 16+16+4+4+16+16=72</p>
+<p>【样例解释 2】</p>
+<p>地形序列”.*”：7 条，每条权重为 7，计 49</p>
+<p>地形序列”*.”：7 条，每条权重为 7，计 49</p>
+<p>地形序列”..”：4 条，每条权重为 4，计 16</p>
+<p>地形序列”**”：4 条，每条权重为 4，计 16</p>
+<p>地形序列”..*”：2 条，每条权重为 2，计 4</p>
+<p>地形序列”.*.”：10 条，每条权重为 10，计 100</p>
+<p>地形序列”.**”：2 条，每条权重为 2，计 4</p>
+<p>地形序列”*..”：2 条，每条权重为 2，计 4</p>
+<p>地形序列”*.*”：10 条，每条权重为 10，计 100</p>
+<p>地形序列”**.”：2 条，每条权重为 2，计 4</p>
+<p>地形序列”.*.*”：6 条，每条权重为 6，计 36</p>
+<p>地形序列”*.*.”：6 条，每条权重为 6，计 36</p>
+<p>共计 49+49+16+16+4+100+4+4+100+4+36+36=418</p>
+<p>【数据规模与约定】</p>
+<p>对于 10%的数据，n * m ≤ 4.</p>
+<p>对于 30%的数据，n, m ≤ 5.</p>
+<p>对于 60%的数据，n, m ≤ 10.</p>
+<p>另有 20%的数据，所有地形均为”6”。</p>
+<p>对于 100%的数据，1 ≤ n, m ≤ 30，字符集由大小写字母，数字和”.”、”*”构成。</p>
+<h2 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h2><p>似乎不可做？</p>
+<hr>
+<hr>
+<hr>
+<h1 id="树的难题"><a href="#树的难题" class="headerlink" title="树的难题"></a>树的难题</h1><h2 id="题目描述-1"><a href="#题目描述-1" class="headerlink" title="题目描述"></a>题目描述</h2><p>给你一棵 n 个点的无根树。</p>
+<p>树上的每条边具有颜色。一共有 m 种颜色，编号为 1 到 m。第 i 种颜色的权值为 ci。</p>
+<p>对于一条树上的简单路径，路径上经过的所有边按顺序组成一个颜色序列，序列可以划</p>
+<p>分成若干个相同颜色段。定义路径权值为颜色序列上每个同颜色段的颜色权值之和。</p>
+<p>请你计算，经过边数在 l 到 r 之间的所有简单路径中，路径权值的最大值。</p>
+<h2 id="输入格式-1"><a href="#输入格式-1" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行，四个整数 n, m, l, r。</p>
+<p>第二行，m个整数 c1, c2, ……, cm，由空格隔开。依次表示每个颜色的权值。</p>
+<p>接下来 n-1 行，每行三个整数</p>
+<h2 id="输出格式-1"><a href="#输出格式-1" class="headerlink" title="输出格式"></a>输出格式</h2><p>输出一行，一个整数，表示答案。</p>
+<h6 id="样例输入-1-1"><a href="#样例输入-1-1" class="headerlink" title="样例输入 1"></a>样例输入 1</h6><p>5 3 1 4<br>-1 -5 -2<br>1 2 1<br>1 3 1<br>2 4 2<br>2 5 3</p>
+<h6 id="样例输出-1-1"><a href="#样例输出-1-1" class="headerlink" title="样例输出 1"></a>样例输出 1</h6><p>-1</p>
+<h6 id="样例输入-2-1"><a href="#样例输入-2-1" class="headerlink" title="样例输入 2"></a>样例输入 2</h6><p>8 4 3 4<br>-7 9 6 1<br>1 2 1<br>1 3 2<br>1 4 1<br>2 5 1<br>5 6 2<br>3 7 1<br>3 8 3</p>
+<h6 id="样例输出-2-1"><a href="#样例输出-2-1" class="headerlink" title="样例输出 2"></a>样例输出 2</h6><p>11</p>
+<p><img src="/img/bj20172.jpg" alt="bj20172"></p>
+<h2 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h2><p>树分治，被扫把图卡了。。</p>
+<hr>
+<hr>
+<hr>
+<h1 id="魔法咒语"><a href="#魔法咒语" class="headerlink" title="魔法咒语"></a>魔法咒语</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>Chandra 是一个魔法天才。</p>
+<p>从一岁时接受火之教会洗礼之后，Chandra 就显示出对火元素无与伦比的亲和力，轻而易举地学会种种晦涩难解的法术。这也多亏 Chandra 有着常人难以企及的语言天赋，让她能轻松流利地说出咒语中那些极其拗口的魔法词汇。</p>
+<p>直到十四岁，开始学习威力强大的禁咒法术时，Chandra 才遇到了障碍。</p>
+<p>根据火之魔法规则，禁咒的构成单位是 N 个基本词汇。施法时只要凝聚精神力，说出一段用这些词语组成的长度恰好等于 L 的语言，就能释放威力超乎想象的火法术。过去的魔法师们总结了几种表达起来最连贯的组合方式，方便施法者以最快语速完成法术。</p>
+<p>但具有魔法和语言双重天才的 Chandra 不满足于这几种流传下来的禁咒，因为她可以毫无困难地说出普通人几乎不可能表达的禁咒语句。然而，在实际施法时，Chandra 发现有些自创禁咒念出后不但没有预期效果，反而会使自己的精神力迅速枯竭，十分难受。</p>
+<p>这个问题令 Chandra 万分不解。她大量阅读典籍，到处走访魔法学者，并且不顾精神折磨一次又一次尝试新咒语，希望找出问题的答案。</p>
+<p>很多年过去了，在一次远古遗迹探险中，Chandra 意外闯进了火之神艾利克斯的不知名神殿。根据岩土特征分析，神殿应该有上万年的历史，这是极其罕见的。Chandra 小心翼翼地四处探索，沿着魔力流动来到一间密室。她看见密室中央悬浮着一本书籍。在魔法保护下书籍状况完好。精通上古语言的 Chandra 读过此书，终于解开了多年的困惑。</p>
+<p>禁咒法术之所以威力强大，是因为咒语借用了火之神艾利克斯的神力。这本书里记载了艾利克斯生平忌讳的 M 个词语，比如情敌的名字、讨厌的植物等等。使用禁咒法术时，如果语言中含有任何忌讳词语，就会触怒神力而失效，施法者也一并遭受惩罚。</p>
+<p>例如，若 ”banana” 是唯一的忌讳词语，“an”、”ban”、”analysis” 是基本词汇，禁咒长度须是 11，则“bananalysis” 是无效法术，”analysisban”、”anbanbanban”是两个有效法术。注意：一个基本词汇在禁咒法术中可以出现零次、一次或多次；只要组成方式不同就认为是不同的禁咒法术，即使书写形式相同。</p>
+<p>谜题破解，Chandra 心情大好。她决定计算一共有多少种有效的禁咒法术。</p>
+<p>由于答案可能很大，你只需要输出答案模 1,000,000,007 的结果。</p>
+<h2 id="输入格式-2"><a href="#输入格式-2" class="headerlink" title="输入格式"></a>输入格式</h2><p>第一行，三个正整数 N, M, L。</p>
+<p>接下来 N 行，每行一个只含小写英文字母的字符串，表示一个基本词汇。</p>
+<p>接下来 M 行，每行一个只含小写英文字母的字符串，表示一个忌讳词语。</p>
+<h2 id="输出格式-2"><a href="#输出格式-2" class="headerlink" title="输出格式"></a>输出格式</h2><p>仅一行，一个整数，表示答案（模 10^9+7）。</p>
+<h6 id="样例输入-1-2"><a href="#样例输入-1-2" class="headerlink" title="样例输入 1"></a>样例输入 1</h6><p>4 2 10<br>boom<br>oo<br>ooh<br>bang<br>ob<br>mo</p>
+<h6 id="样例输出-1-2"><a href="#样例输出-1-2" class="headerlink" title="样例输出 1"></a>样例输出 1</h6><p>14</p>
+<h6 id="样例输入-2-2"><a href="#样例输入-2-2" class="headerlink" title="样例输入 2"></a>样例输入 2</h6><p>3 1 3<br>a<br>ab<br>aba<br>aaa</p>
+<h6 id="样例输出-2-2"><a href="#样例输出-2-2" class="headerlink" title="样例输出 2"></a>样例输出 2</h6><p>3</p>
+<h6 id="样例输入-3-1"><a href="#样例输入-3-1" class="headerlink" title="样例输入 3"></a>样例输入 3</h6><p>3 1 14<br>ban<br>an<br>analysis<br>banana</p>
+<h6 id="样例输出-3-1"><a href="#样例输出-3-1" class="headerlink" title="样例输出 3"></a>样例输出 3</h6><p>15</p>
+<h2 id="提示-1"><a href="#提示-1" class="headerlink" title="提示"></a>提示</h2><p>【样例解释 1】</p>
+<p>有效的禁咒法术共有 14 种：boom/bang/oo，oo/oo/oo/oo/oo，oo/oo/ooh/ooh，</p>
+<p>oo/ooh/oo/ooh，oo/ooh/ooh/oo，ooh/oo/oo/ooh，ooh/oo/ooh/oo，</p>
+<p>ooh/ooh/boom，ooh/ooh/oo/oo，ooh/ooh/bang，ooh/bang/ooh，</p>
+<p>bang/oo/oo/oo，bang/ooh/ooh，bang/bang/oo。</p>
+<p>【样例解释 2】</p>
+<p>有效的禁咒法术有 a/ab, ab/a, aba 共三种。注意，ab/a 和 aba 算成两种不同的禁咒法术。</p>
+<p><img src="/img/bj20173.jpg" alt="bj20173"></p>
+<h2 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h2><p>AC自动机上DP</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/zzz/" rel="tag"># zzz</a>
+          
+            <a href="/tags/Contest/" rel="tag"># Contest</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/18/旋转卡壳——矩形覆盖/" rel="next" title="旋转卡壳——矩形覆盖">
+                <i class="fa fa-chevron-left"></i> 旋转卡壳——矩形覆盖
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/23/FJOI2016———PAM、斯特林数/" rel="prev" title="FJOI2016———PAM、斯特林数">
+                FJOI2016———PAM、斯特林数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Starkmal" />
+            
+              <p class="site-author-name" itemprop="name">Starkmal</p>
+              <p class="site-description motion-element" itemprop="description">Oier</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/starkmal" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:daihaoran_stark@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jackpoison.github.io/" title="sparrow" target="_blank">sparrow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://rgnoh.github.io/" title="rgnoH" target="_blank">rgnoH</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mogicianevian.github.io/" title="OBlack" target="_blank">OBlack</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#机动训练"><span class="nav-number">1.</span> <span class="nav-text">机动训练</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式"><span class="nav-number">1.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式"><span class="nav-number">1.3.</span> <span class="nav-text">输出格式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输入-1"><span class="nav-number">1.3.0.0.0.1.</span> <span class="nav-text">样例输入 1</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输出-1"><span class="nav-number">1.3.0.0.0.2.</span> <span class="nav-text">样例输出 1</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输入-2"><span class="nav-number">1.3.0.0.0.3.</span> <span class="nav-text">样例输入 2</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输出-2"><span class="nav-number">1.3.0.0.0.4.</span> <span class="nav-text">样例输出 2</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输入-3"><span class="nav-number">1.3.0.0.0.5.</span> <span class="nav-text">样例输入 3</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输出-3"><span class="nav-number">1.3.0.0.0.6.</span> <span class="nav-text">样例输出 3</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#提示"><span class="nav-number">1.3.0.0.0.7.</span> <span class="nav-text">提示</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-number">1.4.</span> <span class="nav-text">说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution"><span class="nav-number">1.5.</span> <span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#树的难题"><span class="nav-number">2.</span> <span class="nav-text">树的难题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述-1"><span class="nav-number">2.1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式-1"><span class="nav-number">2.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式-1"><span class="nav-number">2.3.</span> <span class="nav-text">输出格式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输入-1-1"><span class="nav-number">2.3.0.0.0.1.</span> <span class="nav-text">样例输入 1</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输出-1-1"><span class="nav-number">2.3.0.0.0.2.</span> <span class="nav-text">样例输出 1</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输入-2-1"><span class="nav-number">2.3.0.0.0.3.</span> <span class="nav-text">样例输入 2</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输出-2-1"><span class="nav-number">2.3.0.0.0.4.</span> <span class="nav-text">样例输出 2</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution-1"><span class="nav-number">2.4.</span> <span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#魔法咒语"><span class="nav-number">3.</span> <span class="nav-text">魔法咒语</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题描述"><span class="nav-number">3.1.</span> <span class="nav-text">问题描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输入格式-2"><span class="nav-number">3.2.</span> <span class="nav-text">输入格式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出格式-2"><span class="nav-number">3.3.</span> <span class="nav-text">输出格式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输入-1-2"><span class="nav-number">3.3.0.0.0.1.</span> <span class="nav-text">样例输入 1</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输出-1-2"><span class="nav-number">3.3.0.0.0.2.</span> <span class="nav-text">样例输出 1</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输入-2-2"><span class="nav-number">3.3.0.0.0.3.</span> <span class="nav-text">样例输入 2</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输出-2-2"><span class="nav-number">3.3.0.0.0.4.</span> <span class="nav-text">样例输出 2</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输入-3-1"><span class="nav-number">3.3.0.0.0.5.</span> <span class="nav-text">样例输入 3</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#样例输出-3-1"><span class="nav-number">3.3.0.0.0.6.</span> <span class="nav-text">样例输出 3</span></a></li></ol></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提示-1"><span class="nav-number">3.4.</span> <span class="nav-text">提示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solution-2"><span class="nav-number">3.5.</span> <span class="nav-text">Solution</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starkmal</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>

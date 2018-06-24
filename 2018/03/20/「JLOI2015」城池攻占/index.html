@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta name="baidu-site-verification" content="jV2s9nzI8o" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+  <link rel="stylesheet" media="all" href="/lib/Han/dist/han.min.css?v=3.3">
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="倍增," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="题目描述小铭铭最近获得了一副新的桌游，游戏中需要用 $m$ 个骑士攻占 $n$ 个城池。">
+<meta name="keywords" content="倍增">
+<meta property="og:type" content="article">
+<meta property="og:title" content="「JLOI2015」城池攻占">
+<meta property="og:url" content="http://yoursite.com/2018/03/20/「JLOI2015」城池攻占/index.html">
+<meta property="og:site_name" content="Starkmal&#39;s Cruiser">
+<meta property="og:description" content="题目描述小铭铭最近获得了一副新的桌游，游戏中需要用 $m$ 个骑士攻占 $n$ 个城池。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-03-20T11:40:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="「JLOI2015」城池攻占">
+<meta name="twitter:description" content="题目描述小铭铭最近获得了一副新的桌游，游戏中需要用 $m$ 个骑士攻占 $n$ 个城池。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"噫..我没写过呢: ${query}","hits_stats":"${hits} ${time}秒运行游戏 ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/20/「JLOI2015」城池攻占/"/>
+
+
+
+
+
+  <title>「JLOI2015」城池攻占 | Starkmal's Cruiser</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Starkmal's Cruiser</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">May the force be with you</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/20/「JLOI2015」城池攻占/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Starkmal">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Starkmal's Cruiser">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">「JLOI2015」城池攻占</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-20T19:35:29+08:00">
+                2018-03-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body han-init-context" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>小铭铭最近获得了一副新的桌游，游戏中需要用 $m$ 个骑士攻占 $n$ 个城池。</p>
+<a id="more"></a>
+<p>这 $n$ 个城池用 $1$ 到 $n$ 的整数表示。除 $1$ 号城池外，城池 $i$ 会受到另一座城池 $f_i$ 的管辖，其中 $f_i &lt;i$。也就是说，所有城池构成了一棵有根树。这 $m$ 个骑士用 $1$ 到 $m$ 的整数表示，其中第 $i$ 个骑士的初始战斗力为 $s_i$，第一个攻击的城池为 $c_i$。</p>
+<p>每个城池有一个防御值 $h_i$，如果一个骑士的战斗力大于等于城池的生命值，那么骑士就可以占领这座城池；否则占领失败，骑士将在这座城池牺牲。占领一个城池以后，骑士的战斗力将发生变化，然后继续攻击管辖这座城池的城池，直到占领 $1$ 号城池，或牺牲为止。</p>
+<p>除 $1$ 号城池外，每个城池 $i$ 会给出两个战斗力变化参数 $a_i, v_i$。若 $a_i = 0$，攻占城池 $i$ 以后骑士战斗力会增加 $v_i$；若 $a_i =1$，攻占城池 $i$ 以后，战斗力会乘以 $v_i$。注意每个骑士是单独计算的。也就是说一个骑士攻击一座城池，不管结果如何，均不会影响其他骑士攻击这座城池的结果。</p>
+<p>现在的问题是，对于每个城池，输出有多少个骑士在这里牺牲；对于每个骑士，输出他攻占的城池数量。</p>
+<h2 id="算法讨论"><a href="#算法讨论" class="headerlink" title="算法讨论"></a>算法讨论</h2><p>好像不是很优秀的倍增算法。。</p>
+<p>对于每个点，存一下往上走$2^i$步所需要最小的战斗力，再记一下途中的buff就好了</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">300005</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> ll Inf = <span class="number">6e18</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> buf[<span class="number">1</span> &lt;&lt; <span class="number">20</span>], *p1, *p2;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> GC (p1 == p2 &amp;&amp; (p2 = (p1 = buf) + fread (buf, 1, 1000000, stdin), p1 == p2) ? 0 : *p1 ++)</span></span><br><span class="line"><span class="keyword">inline</span> ll _R() &#123;</span><br><span class="line">	ll d = <span class="number">0</span>; <span class="keyword">bool</span> ty = <span class="number">1</span>; <span class="keyword">char</span> t;</span><br><span class="line">	<span class="keyword">while</span> (t = GC, (t &lt; <span class="string">'0'</span> || t &gt; <span class="string">'9'</span>) &amp;&amp; t != <span class="string">'-'</span>) ;</span><br><span class="line">	t == <span class="string">'-'</span> ? (ty = <span class="number">0</span>) : (d = t - <span class="string">'0'</span>);</span><br><span class="line">	<span class="keyword">while</span> (t = GC, t &gt;= <span class="string">'0'</span> &amp;&amp; t &lt;= <span class="string">'9'</span>) d = (d &lt;&lt; <span class="number">3</span>) + (d &lt;&lt; <span class="number">1</span>) + t - <span class="string">'0'</span>;</span><br><span class="line">	<span class="keyword">return</span> ty ? d : -d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, m, ans1[N], ans2[N];</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">tr_matrix</span> &#123;</span></span><br><span class="line">	ll ml, ad;</span><br><span class="line">&#125; tr[N][<span class="number">20</span>];</span><br><span class="line">tr_matrix <span class="keyword">operator</span> * (<span class="keyword">const</span> tr_matrix&amp; lhs, <span class="keyword">const</span> tr_matrix&amp; rhs) &#123;</span><br><span class="line">	<span class="keyword">return</span> (tr_matrix) &#123;lhs.ml * rhs.ml, lhs.ad * rhs.ml + rhs.ad&#125;;</span><br><span class="line">&#125;</span><br><span class="line">ll <span class="keyword">operator</span> * (<span class="keyword">const</span> tr_matrix&amp; lhs, ll x) &#123;</span><br><span class="line">	<span class="keyword">return</span> x * lhs.ml + lhs.ad;</span><br><span class="line">&#125;</span><br><span class="line">ll <span class="keyword">operator</span> * (ll x, <span class="keyword">const</span> tr_matrix&amp; rhs) &#123;</span><br><span class="line">	<span class="keyword">return</span> x * rhs.ml + rhs.ad;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ll rc[N][<span class="number">20</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> Fa[N][<span class="number">20</span>], Dep[N];</span><br><span class="line"><span class="keyword">int</span> Tote, Last[N], Next[N &lt;&lt; <span class="number">1</span>], End[N &lt;&lt; <span class="number">1</span>];</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ADDE(ST, END) (End[++ Tote] = END, Next[Tote] = Last[ST], Last[ST] = Tote)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">19</span>; i ++) rc[x][i] = Inf;</span><br><span class="line">	Dep[x] = Dep[fa] + <span class="number">1</span>;</span><br><span class="line">	Fa[x][<span class="number">0</span>] = fa;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>, v = Fa[x][i - <span class="number">1</span>]; i &lt; <span class="number">20</span> &amp;&amp; (<span class="number">1</span> &lt;&lt; i) &lt;= Dep[x]; v = Fa[x][i], i ++) &#123;</span><br><span class="line">		Fa[x][i] = Fa[v][i - <span class="number">1</span>];</span><br><span class="line">		tr[x][i] = tr[x][i - <span class="number">1</span>] * tr[v][i - <span class="number">1</span>];</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> (tr[x][i - <span class="number">1</span>].ml &lt; <span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">		rc[x][i] = max(rc[x][i - <span class="number">1</span>], (rc[v][i - <span class="number">1</span>] - tr[x][i - <span class="number">1</span>].ad - <span class="number">1</span>) / tr[x][i - <span class="number">1</span>].ml + <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> u, i = Last[x]; i; i = Next[i])</span><br><span class="line">		<span class="keyword">if</span> (u = End[i], u != fa) dfs(u, x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	freopen(<span class="string">"fall.in"</span>, <span class="string">"r"</span>, <span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">"fall.out"</span>, <span class="string">"w"</span>, <span class="built_in">stdout</span>);</span><br><span class="line">	<span class="keyword">int</span> i, j, k, x, y;</span><br><span class="line">	ll d;</span><br><span class="line">	n = _R(), m = _R();</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i ++) rc[i][<span class="number">0</span>] = _R();</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">2</span>; i &lt;= n; i ++) &#123;</span><br><span class="line">		x = _R(), k = _R();</span><br><span class="line">		<span class="keyword">if</span> (k == <span class="number">0</span>) tr[i][<span class="number">0</span>].ad = _R(), tr[i][<span class="number">0</span>].ml = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> tr[i][<span class="number">0</span>].ml = _R();</span><br><span class="line">		ADDE(x, i);</span><br><span class="line">		ADDE(i, x);</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; i ++) &#123;</span><br><span class="line">		d = _R(), x = _R();</span><br><span class="line">		<span class="keyword">for</span> (j = <span class="number">19</span>; j &gt;= <span class="number">0</span> &amp;&amp; x; j --)</span><br><span class="line">			<span class="keyword">if</span> (rc[x][j] &lt;= d) d = d * tr[x][j], x = Fa[x][j], ans2[i] += <span class="number">1</span> &lt;&lt; j;</span><br><span class="line">		<span class="keyword">if</span> (x == <span class="number">1</span> &amp;&amp; d &gt;= rc[<span class="number">1</span>][<span class="number">0</span>]) ans2[i] ++, x = <span class="number">0</span>;</span><br><span class="line">		ans1[x] ++;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= n; i ++) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans1[i]);</span><br><span class="line">	<span class="keyword">for</span> (i = <span class="number">1</span>; i &lt;= m; i ++) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, ans2[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/倍增/" rel="tag"># 倍增</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/20/「JLOI2015」装备购买/" rel="next" title="「JLOI2015」装备购买">
+                <i class="fa fa-chevron-left"></i> 「JLOI2015」装备购买
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/04/bzoj5210 最大连通子块和 , 动态DP/" rel="prev" title="「bzoj5210」最大连通子块和,动态DP">
+                「bzoj5210」最大连通子块和,动态DP <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Starkmal" />
+            
+              <p class="site-author-name" itemprop="name">Starkmal</p>
+              <p class="site-description motion-element" itemprop="description">Oier</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/starkmal" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:daihaoran_stark@163.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://jackpoison.github.io/" title="sparrow" target="_blank">sparrow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://rgnoh.github.io/" title="rgnoH" target="_blank">rgnoH</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://mogicianevian.github.io/" title="OBlack" target="_blank">OBlack</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述"><span class="nav-number">1.</span> <span class="nav-text">题目描述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法讨论"><span class="nav-number">2.</span> <span class="nav-text">算法讨论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Starkmal</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+</body>
+</html>
